@@ -4,9 +4,11 @@
 """
 
 from eve import Eve
+import os
 import twilio.twiml
 
 app = Eve()
+
 
 @app.route('/custom/your_late_call', methods=['GET', 'POST'])
 def your_late_call():
@@ -16,4 +18,6 @@ def your_late_call():
     return str(resp)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0',  debug=True)
+    host = '0.0.0.0'
+    port = int(os.environ.get('PORT')) if 'PORT' in os.environ else 5000
+    app.run(host=host, port=port, debug=True)
