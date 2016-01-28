@@ -43,7 +43,7 @@ def phone_dial():
     return Response(status=200)
 
 @blueprint.route('/call', methods=['GET', 'POST'])
-def call(a):
+def call():
     # print(request.args.get('call_script_id'))
     # call_script = app.data.driver.db['callscript'].find_one({"_id": request.args.get('call_script_id')})
     # print(call_script)
