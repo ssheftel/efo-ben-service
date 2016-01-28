@@ -2,6 +2,7 @@ import os
 from flask import Blueprint, current_app as app, request, Response
 import twilio.twiml
 from twilio.rest import TwilioRestClient
+from time import sleep
 
 blueprint = Blueprint('phone', __name__)
 
@@ -38,6 +39,7 @@ def phone_dial():
     twilio_client.calls.create(to=data['to'],
                                from_=TWILIO_VOICE,
                                url=call_url)
+    sleep(.5)
     return Response(status=200)
 
 @blueprint.route('/call/<path:call_script_id>', methods=['GET', 'POST'])
