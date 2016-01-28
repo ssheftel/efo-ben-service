@@ -20,11 +20,35 @@ JWT_SCOPE_CLAIM = os.environ.get('JWT_SCOPE_CLAIM')
 
 PUBLIC_METHODS = ITEM_METHODS = ['GET', 'POST', 'PATCH',
                                                   'PUT', 'DELETE']
+# Enable reads (GET), inserts (POST) and DELETE for resources/collections
+# (if you omit this line, the API will default to ['GET'] and provide
+# read-only access to the endpoint).
 RESOURCE_METHODS = ['GET', 'POST', 'DELETE']
-ITEM_METHODS = ['GET', 'PATCH', 'PUT', 'DELETE']
-BULK_ENABLED = True
-DATE_FORMAT = '%Y-%m-%dT%H:%M:%S.%fZ'
-X_DOMAIN = '*'
+
+# Enable reads (GET), edits (PATCH) and deletes of individual items
+# (defaults to read-only item access).
+ITEM_METHODS = ['GET', 'PATCH', 'DELETE']
+
+
+# Public enabled collections methods
+PUBLIC_METHODS = ['GET']
+
+# Public enabled item methods
+PUBLIC_ITEM_METHODS = ['GET']
+
+# We enable standard client cache directives for all resources exposed by the
+# API, to 20 sec. We can always override these global settings later.
+CACHE_CONTROL = 'max-age=00'
+CACHE_EXPIRES = 20
+
+# Max numper of records per page
+PAGINATION_LIMIT = 2000
+
+# Disable XML - cause it sucks
+XML = False
+
+# Enable Cross-Origin request from all domains - TMP
+X_DOMAINS = '*'
 
 user = {
     'schema': {
