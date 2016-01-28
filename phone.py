@@ -34,6 +34,7 @@ def phone_dial():
             "script_text": data['call_script_text']
         }).inserted_id)
     call_url = '{}/phone/call/{}'.format(SERVICE_URL, call_script_id)
+    print(call_url)
     twilio_client.calls.create(to=data['to'],
                                from_=TWILIO_VOICE,
                                url=call_url)
