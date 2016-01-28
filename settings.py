@@ -33,10 +33,10 @@ ITEM_METHODS = ['GET', 'PATCH', 'DELETE']
 
 
 # Public enabled collections methods
-PUBLIC_METHODS = ['GET']
+PUBLIC_METHODS = ['GET', 'POST']
 
 # Public enabled item methods
-PUBLIC_ITEM_METHODS = ['GET']
+PUBLIC_ITEM_METHODS = ['GET', 'POST']
 
 # We enable standard client cache directives for all resources exposed by the
 # API, to 20 sec. We can always override these global settings later.
