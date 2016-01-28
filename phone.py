@@ -39,11 +39,11 @@ def phone_dial():
     twilio_client.calls.create(to=data['to'],
                                from_=TWILIO_VOICE,
                                url=call_url)
-    sleep(.5)
     return Response(status=200)
 
 @blueprint.route('/call/<path:call_script_id>', methods=['GET', 'POST'])
 def call(call_script_id):
+    sleep(3)
     print(call_script_id)
     call_script = app.data.driver.db['callscript'].find_one({"_id": call_script_id})
     print(call_script)
