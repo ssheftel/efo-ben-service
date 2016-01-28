@@ -29,25 +29,26 @@ def phone_dial():
     """
     data = request.get_json()
     if not data.get('to', None): return Response(status=400)
-    call_script_id = data.get('call_script_id', "56aa4c8bb0bca60023000000")
-    if data.get('call_script_text', None):
-        call_script_id = str(app.data.driver.db['callscripts'].insert_one({
-            "script_text": data['call_script_text']
-        }).inserted_id)
+    # call_script_id = data.get('call_script_id', "56aa4c8bb0bca60023000000")
+    # if data.get('call_script_text', None):
+    #     call_script_id = str(app.data.driver.db['callscripts'].insert_one({
+    #         "script_text": data['call_script_text']
+    #     }).inserted_id)
     #call_url = '{}/phone/call/{}'.format(SERVICE_URL, call_script_id)
-    call_url = '{}/phone/call?call_script_id={}'.format(SERVICE_URL, call_script_id)
-    print(call_url)
+    # call_url = '{}/phone/call'.format(SERVICE_URL, call_script_id)
+    call_url = '{}/phone/call'.format(SERVICE_URL)
     twilio_client.calls.create(to=data['to'],
                                from_=TWILIO_VOICE,
                                url=call_url)
     return Response(status=200)
 
-@blueprint.route('/call/<a>', methods=['GET', 'POST'])
+@blueprint.route('/call', methods=['GET', 'POST'])
 def call(a):
-    print(request.args.get('call_script_id'))
-    call_script = app.data.driver.db['callscript'].find_one({"_id": request.args.get('call_script_id')})
-    print(call_script)
-    script_text = call_script['script_text']
+    # print(request.args.get('call_script_id'))
+    # call_script = app.data.driver.db['callscript'].find_one({"_id": request.args.get('call_script_id')})
+    # print(call_script)
+    # script_text = call_script['script_text']
+    script_text = "Hi Your Late!"
     resp = twilio.twiml.Response()
     resp.say(script_text)
     return str(resp)
