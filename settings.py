@@ -75,7 +75,7 @@ user = {
         'email': {'type': 'string'},
 
         # 'resource_methods': ['GET', 'POST'],
-        # 'bulk_enabled': True
+        # 'bulk_enabled': True d
     }
 
 }
