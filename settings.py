@@ -23,6 +23,7 @@ PUBLIC_METHODS = ITEM_METHODS = ['GET', 'POST', 'PATCH',
 RESOURCE_METHODS = ['GET', 'POST', 'DELETE']
 ITEM_METHODS = ['GET', 'PATCH', 'PUT', 'DELETE']
 BULK_ENABLED = True
+X_DOMAIN = '*'
 
 user = {
     'schema': {
