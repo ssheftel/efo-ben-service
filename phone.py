@@ -34,7 +34,8 @@ def phone_dial():
         call_script_id = str(app.data.driver.db['callscripts'].insert_one({
             "script_text": data['call_script_text']
         }).inserted_id)
-    call_url = '{}/phone/call/{}'.format(SERVICE_URL, call_script_id)
+    #call_url = '{}/phone/call/{}'.format(SERVICE_URL, call_script_id)
+    call_url = '{}/phone/call?call_script_id={}'.format(SERVICE_URL, call_script_id)
     print(call_url)
     twilio_client.calls.create(to=data['to'],
                                from_=TWILIO_VOICE,
@@ -43,9 +44,8 @@ def phone_dial():
 
 @blueprint.route('/call/<a>', methods=['GET', 'POST'])
 def call(a):
-    sleep(3)
-    print(a)
-    call_script = app.data.driver.db['callscript'].find_one({"_id": a})
+    print(request.args.get('call_script_id'))
+    call_script = app.data.driver.db['callscript'].find_one({"_id": request.args.get('call_script_id')})
     print(call_script)
     script_text = call_script['script_text']
     resp = twilio.twiml.Response()
