@@ -6,9 +6,6 @@ from twilio.rest import TwilioRestClient
 blueprint = Blueprint('phone', __name__)
 
 
-@blueprint.route('/', methods=['GET'])
-def f():
-    return 'hi'
 
 SERVICE_URL = os.environ.get('SERVICE_URL')
 
@@ -33,9 +30,9 @@ def phone_dial():
     if not data.get('to', None): return Response(status=400)
     call_script_id = data.get('call_script_id', "56aa4c8bb0bca60023000000")
     if data.get('call_script_text', None):
-        call_script_id = app.data.driver.db['callscripts'].insert_one({
+        call_script_id = str(app.data.driver.db['callscripts'].insert_one({
             "script_text": data['call_script_text']
-        })
+        }).inserted_id)
     call_url = '{}/phone/call/{}'.format(SERVICE_URL, call_script_id)
     twilio_client.calls.create(to=data['to'],
                                from_=TWILIO_VOICE,
