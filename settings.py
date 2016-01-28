@@ -18,6 +18,8 @@ JWT_AUDIENCES = os.environ.get('JWT_AUDIENCES').split(', ')
 JWT_ROLES_CLAIM = os.environ.get('JWT_ROLES_CLAIM').split(', ')
 JWT_SCOPE_CLAIM = os.environ.get('JWT_SCOPE_CLAIM')
 
+#DATE_FORMAT = '%Y-%m-%dT%H:%M:%S.%fZ'
+
 PUBLIC_METHODS = ITEM_METHODS = ['GET', 'POST', 'PATCH',
                                                   'PUT', 'DELETE']
 # Enable reads (GET), inserts (POST) and DELETE for resources/collections
@@ -47,8 +49,10 @@ PAGINATION_LIMIT = 2000
 # Disable XML - cause it sucks
 XML = False
 
+DATE_FORMAT = '%Y-%m-%dT%H:%M:%S.%fZ'
 # Enable Cross-Origin request from all domains - TMP
 X_DOMAINS = '*'
+X_ALLOW_CREDENTIALS = '*'
 
 user = {
     'schema': {
@@ -76,24 +80,29 @@ user = {
 
 }
 
+"""
+{
+    location: {
+        "type": "Point",
+        "coordinates": [10,20]
+    },
+    time: '2012-05-29T19:30:03.283Z',
+    user: '56aa76b0cfc207b71181fce4'
+}
+"""
 checkin = {
     'schema': {
-        'coor': {
+        # 'b':{'type':'string'}
+        'geo': {
             'type': 'point',
             'required': True
         },
         'time': {
-            'type': 'datetime',
-            'required': True
-        },
+             'type': 'datetime',
+             'required': True
+         },
         'user': {
-            'type': 'objectid',
-            'required': True,
-            'data_relation': {
-                'resource': 'users',
-                'field': '_id',
-                'embeddable': True
-            }
+            'type': 'objectid'
         }
     }
 
