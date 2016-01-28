@@ -31,7 +31,7 @@ RESOURCE_METHODS = ['GET', 'POST', 'DELETE']
 # (defaults to read-only item access).
 ITEM_METHODS = ['GET', 'PATCH', 'DELETE']
 X_EXPOSE_HEADERS=['Content-Type']
-
+X_HEADERS=['Content-Type']
 
 # Public enabled collections methods
 PUBLIC_METHODS = ['GET', 'POST']
