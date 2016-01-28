@@ -41,6 +41,7 @@ def phone_dial():
 
 @blueprint.route('/call/<call_script_id>', methods=['GET', 'POST'])
 def call(call_script_id):
+    print(call_script_id)
     call_script = app.data.driver.db['callscript'].find_one({"_id": call_script_id})
     script_text = call_script['script_text']
     resp = twilio.twiml.Response()
