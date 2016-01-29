@@ -50,7 +50,7 @@ PAGINATION_LIMIT = 2000
 # Disable XML - cause it sucks
 XML = False
 
-DATE_FORMAT = '%Y-%m-%dT%H:%M:%S.%fZ'
+DATE_FORMAT = '%Y-%m-%dT%H:%M:%S'
 # Enable Cross-Origin request from all domains - TMP
 X_DOMAINS = '*'
 X_ALLOW_CREDENTIALS = '*'
