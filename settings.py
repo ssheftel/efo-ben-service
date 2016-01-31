@@ -54,6 +54,7 @@ DATE_FORMAT = '%Y-%m-%dT%H:%M:%S'
 # Enable Cross-Origin request from all domains - TMP
 X_DOMAINS = '*'
 X_ALLOW_CREDENTIALS = '*'
+QUERY_MAX_RESULTS = 75
 
 user = {
     'schema': {
