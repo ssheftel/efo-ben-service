@@ -13,6 +13,7 @@ SERVICE_URL = os.environ.get('SERVICE_URL')
 TWILIO_ACCOUNT_SID = os.environ.get('TWILIO_ACCOUNT_SID')
 TWILIO_AUTH_TOKEN = os.environ.get('TWILIO_AUTH_TOKEN')
 TWILIO_VOICE = os.environ.get('TWILIO_VOICE')
+TWILIO_NUMBER = os.environ.get('TWILIO_NUMBER')
 
 twilio_client = TwilioRestClient(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
 
@@ -20,6 +21,15 @@ twilio_client = TwilioRestClient(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
 def get_dconfig(cfg_name):
     cfg = app.data.driver.db['dconfig'].find_one({'cfg_name':cfg_name})
     return cfg
+
+@blueprint.route('/txt', methods=['POST'])
+def txt():
+    """
+    {'to': '+123'}
+    """
+    data = request.get_json()
+    twilio_client.messages.create(to=data['to'], from_=TWILIO_NUMBER, body="You're Late!")
+    return Response(status=200)
 
 @blueprint.route('/dial', methods=['POST'])
 def phone_dial():
@@ -48,7 +58,7 @@ def call():
     # call_script = app.data.driver.db['callscript'].find_one({"_id": request.args.get('call_script_id')})
     # print(call_script)
     # script_text = call_script['script_text']
-    script_text = "Hi Your Late!"
+    script_text = "Your Late! Get your ass over to chi's to pay you're fine"
     resp = twilio.twiml.Response()
     resp.say(script_text)
     return str(resp)
